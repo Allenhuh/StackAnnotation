@@ -1,26 +1,29 @@
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.junit.jupiter.api.Tag;
 
 public class ToDoList {
-
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
+	//private List lstTest = new ArrayList();
 	
 	public void addTask (Task task) {
+		//Add code here
+//		int task_ID = 0;
+//		Map<Integer, Task> tasks = new HashMap<>();
+//		Task newtask =  task;
+//		tasks.put(task_ID,newtask);
+//		task_ID = task_ID + 1;
 		tasks.put(task.getDescription(), task);
 	}
 	public void completeTask(String description) {
-		Task task = null;
-		if ((task = tasks.get(description)) != null){
-			task.setComplete(true);
-		};
+		tasks.get(description).setComplete(true);
 	}
 	public boolean getStatus(String description) {
-		Task task = null;
-		if ((task = tasks.get(description)) != null){
-			return task.isComplete();
-		};
-		return false;
+		return tasks.get(description).isComplete();
 	}
 	public Task getTask(String description) {
 		return tasks.get(description);
@@ -32,11 +35,14 @@ public class ToDoList {
 		return tasks.values();
 	}
 	public Collection<Task> getCompletedTasks() {
-		Collection<Task> completedTasks = new ArrayList<Task> ();
-		Collection<Task> allTasks = new ArrayList<Task> ();
-		allTasks = getAllTasks();
-		for (Task task: allTasks) 
-			if (task.isComplete() == true) completedTasks.add(task);
-		return completedTasks;
+		Collection<Task> completedTasks = new ArrayList<Task>();
+        for (Task task: getAllTasks())
+            if (task.isComplete() == true) {
+            	completedTasks.add(task);
+            }    	
+        return completedTasks;
 	}
+	 public int size() {
+	        return tasks.size();
+	    }
 }
