@@ -1,6 +1,7 @@
 //import static org.junit.jupiter.api.Assertions.*;
 
 //import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.*;
@@ -30,7 +31,6 @@ public class ToDoListTest extends TestCase{
 		task1 = null;
 		task2 = null;
 		task3 = null;
-		
 		todoList = null;
 	}
 
@@ -38,14 +38,17 @@ public class ToDoListTest extends TestCase{
 	public void testAddTask() {
 		assertNotNull(todoList);
 		todoList.addTask(task1);
-		assertEquals(1, todoList.getAllTasks().size());
+		todoList.addTask(task2);
+		assertEquals(2, todoList.getAllTasks().size());
 		assertEquals(task1, todoList.getTask(task1.getDescription()));
+		assertEquals(task2, todoList.getTask(task2.getDescription()));
 	}
 	@Test
 	public void testgetStatus() {
 		assertNotNull(todoList);
 		todoList.addTask(task1);
 		assertEquals(false, todoList.getStatus(task1.getDescription()));
+		assertSame("desc 1",task1.getDescription());
 		todoList.completeTask(task1.getDescription());
 		assertEquals(true, todoList.getStatus(task1.getDescription()));
 	}
@@ -53,10 +56,10 @@ public class ToDoListTest extends TestCase{
 	public void testRemoveTask() {
 		assertNotNull(todoList);
 		todoList.addTask(task1);
-		todoList.addTask(task2);;
-		
+		todoList.addTask(task2);
 		todoList.removeTask(task1.getDescription());
 		assertNull(todoList.getTask(task1.getDescription()));	
+		
 	}
 	@Test
 	public void testGetCompletedTasks() {
@@ -65,7 +68,6 @@ public class ToDoListTest extends TestCase{
 		todoList.addTask(task1);
 		todoList.addTask(task2);
 		todoList.addTask(task3);
-		
 		Collection<Task> tasks = todoList.getCompletedTasks();
 		assertEquals(2, tasks.size());
 	}
